@@ -1,7 +1,7 @@
 
 use "get_nth.sml";
 
-fun int_to_month(n : int) : string =
+fun int_to_month(n : int) =
   let
     val months = [
       "January",
