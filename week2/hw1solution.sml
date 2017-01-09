@@ -1,7 +1,30 @@
 
-use "cast_bool_to_int.sml";
-use "int_to_month.sml";
-use "get_nth.sml";
+fun get_nth(items : 'a list, n : int) =
+  if n = 1
+  then hd items
+  else get_nth(tl items, n - 1)
+
+fun cast_bool_to_int(b : bool) = if b then 1 else 0
+
+fun int_to_month(n : int) =
+  let
+    val months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ]
+  in
+    get_nth(months, n)
+  end
 
 val days_in_month = [
   31, 28, 31,
