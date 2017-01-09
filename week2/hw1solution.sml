@@ -33,6 +33,30 @@ val days_in_month = [
   31, 30, 31
 ]
 
+val days_in_month_leap = [
+  31, 29, 31,
+  30, 31, 30,
+  31, 31, 30,
+  31, 30, 31
+]
+
+fun reasonable_date(date : (int * int * int)) =
+  let
+    val year = #1 date
+    val month = #2 date
+    val day = #3 date
+    val leap_year = year mod 4 = 0
+    val days =
+      if (leap_year)
+      then days_in_month_leap
+      else days_in_month
+  in
+    (year > 0)
+    andalso (month > 0) andalso (month <= 12)
+    andalso (day > 0) andalso (day <= 31)
+    andalso (day <= get_nth(days, month))
+  end
+
 fun is_older((y_a, m_a, d_a) : int * int * int, (y_b, m_b, d_b) : int * int * int) =
   (y_a < y_b)
   orelse (y_a = y_b andalso m_a < m_b)
@@ -77,7 +101,9 @@ fun what_month(d : int) =
   1 + number_before_reaching_sum(d, days_in_month)
 
 fun month_range(x : int, y : int) =
-  let
+  if (x > y)
+  then []
+  else let
     val wm = what_month x
   in
     if (x = y)
@@ -97,17 +123,3 @@ fun oldest(dates : (int * int * int) list) =
     then SOME(valOf recur)
     else SOME(head)
   end
-
-fun reasonable_date(date : (int * int * int)) =
-  let
-    val days = days_in_month
-    val year = #1 date
-    val month = #2 date
-    val day = #3 date
-  in
-    (year > 0)
-    andalso ((month > 0) andalso (month <= 12))
-    andalso ((day > 0) andalso (day <= 31))
-    andalso (day <= get_nth(days, month))
-  end
-

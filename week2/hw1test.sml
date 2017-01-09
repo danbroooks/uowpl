@@ -27,3 +27,15 @@ val test10 = month_range (31, 34) = [1,2,2,2]
 
 val test11 = oldest([(2012,2,28),(2011,3,31),(2011,4,28)]) = SOME (2011,3,31)
 
+val test12 = month_range (5, 3) = []
+
+val test13 = reasonable_date (2004,2,29) = true
+
+val test14 = date_to_string (1, 2, 25) = "February 25, 1"
+
+val test15 = date_to_string (3, 1, 1) = "January 1, 3"
+
+val test16 = date_to_string (6, 2, 1) = "February 1, 6"
+
+val test17 = date_to_string (9, 3, 1) = "March 1, 9"
+
