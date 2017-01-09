@@ -39,3 +39,10 @@ val test16 = date_to_string (6, 2, 1) = "February 1, 6"
 
 val test17 = date_to_string (9, 3, 1) = "March 1, 9"
 
+val test18 = contains("hello", ["hello", "world"]) = true
+
+val test19 = uniq([2, 2, 2]) = [2]
+
+val test20 = dates_in_months_challenge ([(2012,2,28),(2013,12,1),(2011,3,31),(2011,4,28)],[2,2,2]) = [(2012,2,28)]
+
+val test21 = number_in_months_challenge ([(2012,2,28),(2013,12,1),(2011,3,31),(2011,4,28)],[2,2,2]) = 1

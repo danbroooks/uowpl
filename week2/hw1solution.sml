@@ -4,6 +4,23 @@ fun get_nth(items : 'a list, n : int) =
   then hd items
   else get_nth(tl items, n - 1)
 
+fun contains(el: ''a, items: ''a list) =
+  if null items
+  then false
+  else ((hd items) = el) orelse contains(el, tl items)
+
+fun uniq(items: ''a list) =
+  let
+    fun recur(acc: ''a list, carry: ''a list) =
+      if null carry
+      then acc
+      else if contains(hd carry, acc)
+      then recur(acc, tl carry)
+      else recur((hd carry)::acc, tl carry)
+  in
+    recur([], items)
+  end
+
 fun cast_bool_to_int(b : bool) = if b then 1 else 0
 
 fun int_to_month(n : int) =
@@ -72,6 +89,9 @@ fun number_in_months(months : (int * int * int) list, nums : int list) =
   then 0
   else number_in_month(months, hd nums) + number_in_months(months, tl nums)
 
+fun number_in_months_challenge(months : (int * int * int) list, nums : int list) =
+  number_in_months(months, uniq nums)
+
 fun dates_in_month(dates : (int * int * int) list, month : int) =
   if null dates
   then []
@@ -88,6 +108,9 @@ fun dates_in_months(dates : (int * int * int) list, months: int list) =
   if null months
   then []
   else dates_in_month(dates, hd months) @ dates_in_months(dates, tl months)
+
+fun dates_in_months_challenge(dates : (int * int * int) list, months: int list) =
+  dates_in_months(dates, uniq months)
 
 fun date_to_string(y : int, m : int, d : int) : string =
   int_to_month(m) ^ " " ^ Int.toString d ^ ", " ^ Int.toString y
